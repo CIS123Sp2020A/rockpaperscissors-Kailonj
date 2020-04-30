@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.messagebox as box
+import random
 
 class MyGUI:
     def __init__(self):
@@ -21,12 +22,14 @@ class MyGUI:
         self.radioVar.set(1)
 
         # Create the Radiobutton widgets in the top_frame.
-        self.rb1 = tkinter.Radiobutton(self.radioFrame, text='Option 1', variable=self.radioVar, value='Option 1')
-        self.rb2 = tkinter.Radiobutton(self.radioFrame, text='Option 2', variable=self.radioVar, value='Option 2')
+        self.rb1 = tkinter.Radiobutton(self.radioFrame, text='rock', variable=self.radioVar, value='rock')
+        self.rb2 = tkinter.Radiobutton(self.radioFrame, text='paper', variable=self.radioVar, value='paper')
+        self.rb3 = tkinter.Radiobutton(self.radioFrame, text='scissors', variable=self.radioVar, value='scissors')
 
         # Pack the Radiobuttons.
         self.rb1.pack()
         self.rb2.pack()
+        self.rb3.pack()
 
         # Set up buttons
         self.okButton = tkinter.Button(self.buttonFrame, text='OK', command=self.showOption)
@@ -43,7 +46,47 @@ class MyGUI:
         # Start the mainloop.
         tkinter.mainloop()
 
+
     def showOption(self):
-        box.showinfo('Selection', 'You selected ' + self.radioVar.get())
+        computerChoice = random.randrange(3)
+        print(computerChoice)
+        if computerChoice == 0:
+            choice = 'paper'
+            #box.showinfo('Computer choice is :' , choice)
+        elif computerChoice ==1:
+            choice = 'scissor'
+            #box.showinfo('Computer choice is :', choice)
+        elif computerChoice ==2:
+            choice = 'rock'
+            #box.showinfo('Computer choice is :', choice)
+
+
+        #box.showinfo('Selection',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+
+
+#winner statements 
+        if choice == 'paper' and self.radioVar.get() == 'scissors':
+            print('True')
+            box.showinfo('Player wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+            print('True')
+        elif choice == 'paper' and self.radioVar.get() == 'rock':
+            print('True')
+            box.showinfo('Computer wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        elif choice == 'paper' and self.radioVar.get() == 'paper':
+            print('True')
+            box.showinfo('Tie',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        if choice == 'scissors' and self.radioVar.get() == 'scissors':
+            box.showinfo('Tie',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        elif choice == 'scissors' and self.radioVar.get() == 'rock':
+            box.showinfo('Player wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        elif choice == 'scissors' and self.radioVar.get() == 'paper':
+            box.showinfo('Computer wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        if choice == 'rock' and self.radioVar.get() == 'rock':
+            box.showinfo('Tie',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        elif choice == 'rock' and self.radioVar.get() == 'paper':
+            box.showinfo('Player wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+        elif choice == 'rock' and self.radioVar.get() == 'scissors':
+            box.showinfo('Computer wins',('Computer selected: ' + choice ,'\n','You selected:' + self.radioVar.get()))
+
 
 demoGUI = MyGUI()
